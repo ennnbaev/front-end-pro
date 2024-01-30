@@ -1,39 +1,44 @@
-//Task 1 Hello User
-
-let name = prompt('What is your name?')
-alert(`Hello, ${name}! How are you?`)
-
-//Task 2 Lines and five-digit number
-
-let firstLine = prompt('Hello, please write down first line')
-let secondLine = prompt('Please write down second line')
-let thirdLine = prompt('Please write down third line')
-alert('Result of concat: ' + firstLine + secondLine + thirdLine)
-
-let number = prompt('Hello, please write down a five-digit number')
-alert(number.charAt(0) + ' ' + number.charAt(1) + ' ' + number.charAt(2) + ' ' + number.charAt(3) + ' ' + number.charAt(4)) //or we can use dividing 10 and operator %
-
-//Task 3 Calculator
-
-let operation = prompt('Hello, I am a super fast Calculator! Please chose operation  (add, sub, mult, div)')
-let firstNumb = prompt('Great! Write down a first number')
-let secondNumb = prompt('Cool! Write down a second number')
-if (operation === 'add') {
-    alert('Sum is: ' + (parseInt(firstNumb) + parseInt(secondNumb)))
-} else if (operation === 'sub') {
-    alert('Sub is: ' + (parseInt(firstNumb) - parseInt(secondNumb)))
-
-} else if (operation === 'mult') {
-    alert('Mult is: ' + (parseInt(firstNumb) * parseInt(secondNumb)))
-} else if (operation === 'div') {
-    alert('Div is: ' + (parseInt(firstNumb) / parseInt(secondNumb)))
+let userBornYears = prompt('Hello! What year were you born?');
+const currentYear = 2024;
+let userAges;
+if (userBornYears === null) {
+    alert('It is a pity that you did not want to enter your year of birth');
+    userAges = '';
 } else {
-    alert('Unsupported operation, please reload page and chose a correct operation (add, sub, mult, div)')
+    userAges = currentYear - parseInt(userBornYears);
 }
-
-//Task 4 Hours in seconds
-
-let hours = prompt('Hey, it calculator from hours to second! Put humber of hours')
-const seconds = hours * 60 * 60
-alert(hours + ` hours equal - ${seconds} sec`)
-
+let userCity = prompt('What city do you live?');
+if (userCity === null) {
+    alert('It is a pity that you did not want to enter your city');
+}
+let userFavSport = prompt('What is your favourite sport?');
+if (userFavSport === null) {
+    alert('It is a pity that you did not want to enter your favourite sport');
+}
+const popularCapitals = ['Kyiv', 'Washington', 'London'];
+let isCapital = true;
+let userCountry;
+if (userCity === popularCapitals[0]) {
+    userCountry = 'Ukraine';
+} else if (userCity === popularCapitals[1]) {
+    userCountry = 'USA';
+} else if (userCity === popularCapitals[2]) {
+    userCountry = 'UK';
+} else {
+    isCapital = false;
+}
+const popularSports = ['Football', 'Tennis', 'Run'];
+let bestSportsmen;
+let isPopularUserSport = true;
+if (userFavSport === popularSports[0]) {
+    bestSportsmen = 'Cristiano Ronaldo';
+} else if (userFavSport === popularSports[1]) {
+    bestSportsmen = 'Novak Jokovich';
+} else if (userFavSport === popularSports[2]) {
+    bestSportsmen = 'Usain Bolt';
+} else {
+    isPopularUserSport = false;
+}
+alert((`User age is ${userAges} `)
+    + (isCapital ? ` You live in the capital of ${userCountry}` : `You live in the city ${userCity}`)
+    + (isPopularUserSport ? ` Great! Do you want to become like ${bestSportsmen}` : ''));
