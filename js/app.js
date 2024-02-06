@@ -47,12 +47,12 @@ let users = [{
     phone: "+1 (837) 586-3283",
     address: "314 Dunne Place, Bawcomville, Guam, 9053"
 }]
-let usersPhoneWithBalanceMore2000 = [];
+let usersPhones = [];
 let sumUsersBalance = 0;
 for (let i = 0; i < users.length; i++) {
     if (users[i].balance > 2000) {
-        usersPhoneWithBalanceMore2000.push(users[i].phone);
+        usersPhones.push(users[i].phone);
     }
     sumUsersBalance += users[i].balance;
 }
-alert(`Users phone whose balance is more than 2000 ${usersPhoneWithBalanceMore2000} . The sum of users balance is ${sumUsersBalance}`);
+alert(`Users phone whose balance is more than 2000 ${usersPhones} . The sum of users balance is ${sumUsersBalance.toFixed(2)}`);
