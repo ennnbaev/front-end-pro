@@ -2,8 +2,8 @@ const array = [16, -37, 54, -4, 72, -56, 47, 4, -16, 25, -37, 46, 4, -51, 27, -6
 let sumOfElements = 0;
 let countOfPositiveElements = 0;
 for (let i = 0; i < array.length; i++) {
-    sumOfElements += array[i];
     if (array[i] > 0) {
+        sumOfElements += array[i];
         countOfPositiveElements++;
     }
 }
