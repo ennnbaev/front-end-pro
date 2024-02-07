@@ -3,7 +3,7 @@ const minLengthForDelete = 5;
 let size = parseInt(prompt("Enter array length"));
 if (!isNaN(size)) {
     for (let i = 0; i < size; i++) {
-        let value = prompt('Enter value #' + i);
+        let value = parseInt(prompt('Enter value #' + (i + 1)));
         array.push(value);
     }
     alert("Your array is " + array);
