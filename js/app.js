@@ -1,39 +1,49 @@
-//Task 1 Hello User
-
-let name = prompt('What is your name?')
-alert(`Hello, ${name}! How are you?`)
-
-//Task 2 Lines and five-digit number
-
-let firstLine = prompt('Hello, please write down first line')
-let secondLine = prompt('Please write down second line')
-let thirdLine = prompt('Please write down third line')
-alert('Result of concat: ' + firstLine + secondLine + thirdLine)
-
-let number = prompt('Hello, please write down a five-digit number')
-alert(number.charAt(0) + ' ' + number.charAt(1) + ' ' + number.charAt(2) + ' ' + number.charAt(3) + ' ' + number.charAt(4)) //or we can use dividing 10 and operator %
-
-//Task 3 Calculator
-
-let operation = prompt('Hello, I am a super fast Calculator! Please chose operation  (add, sub, mult, div)')
-let firstNumb = prompt('Great! Write down a first number')
-let secondNumb = prompt('Cool! Write down a second number')
-if (operation === 'add') {
-    alert('Sum is: ' + (parseInt(firstNumb) + parseInt(secondNumb)))
-} else if (operation === 'sub') {
-    alert('Sub is: ' + (parseInt(firstNumb) - parseInt(secondNumb)))
-
-} else if (operation === 'mult') {
-    alert('Mult is: ' + (parseInt(firstNumb) * parseInt(secondNumb)))
-} else if (operation === 'div') {
-    alert('Div is: ' + (parseInt(firstNumb) / parseInt(secondNumb)))
-} else {
-    alert('Unsupported operation, please reload page and chose a correct operation (add, sub, mult, div)')
+function showProducts() {
+    for (let i = 0; i < products.length; i++) {
+        console.log(`#${i + 1} ${products[i].name} - $${products[i].price}`);
+    }
 }
 
-//Task 4 Hours in seconds
+function getProductNumber() {
+    let productNumber;
+    do {
+        productNumber = parseInt(prompt('Enter product number'));
+    } while (productNumber < 1 || productNumber > products.length || isNaN(productNumber));
+    return productNumber;
+}
 
-let hours = prompt('Hey, it calculator from hours to second! Put humber of hours')
-const seconds = hours * 60 * 60
-alert(hours + ` hours equal - ${seconds} sec`)
+function getProductAmount() {
+    let productAmount;
+    do {
+        productAmount = parseInt(prompt('Enter amount of products you wanna buy'));
+    } while (productAmount < 1 || productAmount > productToBuy.availability || isNaN(productAmount));
+    return productAmount;
+}
+
+function ifDiscountStartsFrom(price, discountStartsFrom) {
+    return price >= discountStartsFrom;
+}
+
+function calculatePriceWithDiscount(price, discount) {
+    return price - price * discount;
+}
+
+function showFinalPrice(finalPrice, withDiscount) {
+    if (withDiscount) {
+        console.log(`Congrats! You get discount. Your final price is ${finalPrice}`)
+    } else {
+        console.log(`The final price is ${finalPrice}`);
+    }
+}
+
+showProducts();
+const productNumber = getProductNumber();
+const productToBuy = products[productNumber - 1];
+const productAmount = getProductAmount();
+const price = productToBuy.price * productAmount;
+const discountStartsFrom = 10000;
+const discount = 0.2;
+const withDiscount = ifDiscountStartsFrom(price, discountStartsFrom);
+const finalPrice = withDiscount ? calculatePriceWithDiscount(price, discount) : price;
+showFinalPrice(finalPrice, withDiscount);
 
