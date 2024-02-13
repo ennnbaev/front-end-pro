@@ -1,7 +1,7 @@
 function fillInTwoDimensionalArray(array) {
     const firstLength = parseInt(prompt('Enter the length of first array'));
     for (let i = 0; i < firstLength; i++) {
-        let innerArray = new Array(parseInt(prompt('Enter the length of inner array # ' + i + 1)));
+        let innerArray = new Array(parseInt(prompt('Enter the length of inner array # ' + (i + 1))));
         array.push(innerArray);
     }
     for (let i = 0; i < array.length; i++) {
