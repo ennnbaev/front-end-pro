@@ -11,8 +11,3 @@ document.getElementById('products').addEventListener('click', event => {
 
   showProductInfo(categoryId, productId);
 });
-document.getElementById("product").addEventListener('click', event => {
-  const productId = event.target.getAttribute('data-product');
-  const categoryId = event.target.getAttribute('data-category');
-  showBill(categoryId, productId);
-});
