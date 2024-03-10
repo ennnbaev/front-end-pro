@@ -8,7 +8,7 @@ const ALL_GENDERS = {
     m: 'Male',
     f: 'Female'
 }
-const All_CITIES = {
+const ALL_CITIES = {
     0: 'No value Selected', // or ''
     1: 'Kyiv',
     2: 'Kharkiv',
@@ -23,7 +23,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
             let fieldName = form.elements[i].name;
             let fieldValue = form.elements[i].value;
             if (form.elements[i].tagName.toLowerCase() === "select") {
-                tableHTML += "<tr><td>" + fieldName + "</td><td>" + All_CITIES[fieldValue] + "</td></tr>";
+                tableHTML += "<tr><td>" + fieldName + "</td><td>" + ALL_CITIES[fieldValue] + "</td></tr>";
             } else {
                 tableHTML += "<tr><td>" + fieldName + "</td><td>" + fieldValue + "</td></tr>";
             }
