@@ -1,39 +1,42 @@
-//Task 1 Hello User
-
-let name = prompt('What is your name?')
-alert(`Hello, ${name}! How are you?`)
-
-//Task 2 Lines and five-digit number
-
-let firstLine = prompt('Hello, please write down first line')
-let secondLine = prompt('Please write down second line')
-let thirdLine = prompt('Please write down third line')
-alert('Result of concat: ' + firstLine + secondLine + thirdLine)
-
-let number = prompt('Hello, please write down a five-digit number')
-alert(number.charAt(0) + ' ' + number.charAt(1) + ' ' + number.charAt(2) + ' ' + number.charAt(3) + ' ' + number.charAt(4)) //or we can use dividing 10 and operator %
-
-//Task 3 Calculator
-
-let operation = prompt('Hello, I am a super fast Calculator! Please chose operation  (add, sub, mult, div)')
-let firstNumb = prompt('Great! Write down a first number')
-let secondNumb = prompt('Cool! Write down a second number')
-if (operation === 'add') {
-    alert('Sum is: ' + (parseInt(firstNumb) + parseInt(secondNumb)))
-} else if (operation === 'sub') {
-    alert('Sub is: ' + (parseInt(firstNumb) - parseInt(secondNumb)))
-
-} else if (operation === 'mult') {
-    alert('Mult is: ' + (parseInt(firstNumb) * parseInt(secondNumb)))
-} else if (operation === 'div') {
-    alert('Div is: ' + (parseInt(firstNumb) / parseInt(secondNumb)))
-} else {
-    alert('Unsupported operation, please reload page and chose a correct operation (add, sub, mult, div)')
+const ALL_LANGUAGES = {
+    en: 'English',
+    ua: 'Ukrainian',
+    ru: 'Russian',
+    de: 'Deutsch'
 }
-
-//Task 4 Hours in seconds
-
-let hours = prompt('Hey, it calculator from hours to second! Put humber of hours')
-const seconds = hours * 60 * 60
-alert(hours + ` hours equal - ${seconds} sec`)
-
+const ALL_GENDERS = {
+    m: 'Male',
+    f: 'Female'
+}
+const All_CITIES = {
+    0: 'No value Selected', // or ''
+    1: 'Kyiv',
+    2: 'Kharkiv',
+    3: 'Odesa'
+}
+document.getElementById("saveButton").addEventListener("click", function () {
+    let form = document.getElementById("registration_form");
+    let tableHTML = "<table border='1'><tr><th>Поле</th><th>Значення</th></tr>";
+    let languages = [];
+    for (let i = 0; i < form.elements.length; i++) {
+        if (form.elements[i].type !== "button" && form.elements[i].type !== "radio" && form.elements[i].type !== "checkbox") {
+            let fieldName = form.elements[i].name;
+            let fieldValue = form.elements[i].value;
+            if (form.elements[i].tagName.toLowerCase() === "select") {
+                tableHTML += "<tr><td>" + fieldName + "</td><td>" + All_CITIES[fieldValue] + "</td></tr>";
+            } else {
+                tableHTML += "<tr><td>" + fieldName + "</td><td>" + fieldValue + "</td></tr>";
+            }
+        } else if (form.elements[i].type === "radio" && form.elements[i].checked) {
+            let fieldName = form.elements[i].name;
+            let fieldValue = form.elements[i].value;
+            tableHTML += "<tr><td>" + fieldName + "</td><td>" + ALL_GENDERS[fieldValue] + "</td></tr>";
+        } else if (form.elements[i].type === "checkbox" && form.elements[i].checked) {
+            languages.push(ALL_LANGUAGES[form.elements[i].value])
+        }
+    }
+    tableHTML += "<tr><td> Languages </td><td>" + languages + "</td></tr>";
+    tableHTML += "</table>";
+    document.body.innerHTML = '';
+    document.body.innerHTML = tableHTML;
+})
