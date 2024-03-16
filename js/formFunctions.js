@@ -1,109 +1,115 @@
 document.querySelector('.save_btn').addEventListener('click', event => {
-  const id = event.target.getAttribute('data-id');
-  const user = collectData();
-  const isValid = validateUser(user);
+    const id = event.target.getAttribute('data-id');
+    const user = collectData();
+    const isValid = validateUser(user);
 
-  if (!isValid) {
-    alert('enter data');
-  } else {
-    if (!id) {
-      user.id = generateUserId();
-      saveUser(user);
-
-      const parent = document.querySelector('#grid');
-      const userRow = createUserRow(user);
-      parent.appendChild(userRow);
+    if (!isValid) {
+        alert('enter data');
     } else {
-      user.id = id;
-      const userIndex = getUserIndexById(id);
-      if (userIndex === -1) {
-        return;
-      }
+        if (!id) {
+            user.id = generateUserId();
+            saveUser(user);
 
-      users[userIndex] = user;
+            const parent = document.querySelector('#grid');
+            const userRow = createUserRow(user);
+            parent.appendChild(userRow);
+        } else {
+            user.id = id;
+            const userIndex = getUserIndexById(id);
+            if (userIndex === -1) {
+                return;
+            }
 
-      const userRow = document.querySelector(`.row[data-id="${id}"]`);
-      userRow.innerHTML = '';
-      createUserRowContent(userRow, user);
-      saveUser(user, false);
-      
+            users[userIndex] = user;
+
+            const userRow = document.querySelector(`.row[data-id="${id}"]`);
+            userRow.innerHTML = '';
+            createUserRowContent(userRow, user);
+            saveUser(user, false);
+
+        }
+
+        clearFormData();
     }
-    
-    clearFormData();
-  }
 
-  // for(let item of form) {
-  //   if (item.type !== 'button') {
-  //     console.log(item.name, item.value);
-  //   }
-  // }
-  
-  document.querySelector('#form').classList.add('hidden');
+    // for(let item of form) {
+    //   if (item.type !== 'button') {
+    //     console.log(item.name, item.value);
+    //   }
+    // }
+
+    document.querySelector('#form').classList.add('hidden');
 });
 
 function clearFormData() {
-  const formElements = document.forms[0].elements;
-  for (let item of formElements) {
-    if (item.type === 'button') {
-      item.removeAttribute('data-id');
-    } else {
-      item.value = '';
+    const formElements = document.forms[0].elements;
+    for (let item of formElements) {
+        if (item.type === 'button') {
+            item.removeAttribute('data-id');
+        } else {
+            item.value = '';
+        }
     }
-  }
 }
 
+function deleteUserData(user) {
+    users.splice(getUserIndexById(user.id), 1);
+    localStorage.setItem('users', JSON.stringify(users));
+    const userRow = document.querySelector(`.row[data-id="${user.id}"]`);
+    userRow.innerHTML = '';
+}
 
 function editUserData(user) {
-  document.querySelector('#form').classList.remove('hidden');
+    document.querySelector('#form').classList.remove('hidden');
 
-  const formElements = document.forms[0].elements;
-  formElements.save_btn.setAttribute('data-id', user.id);
+    const formElements = document.forms[0].elements;
+    formElements.save_btn.setAttribute('data-id', user.id);
 
-  for (let key in user) {
-    if (key === 'id') {
-      continue;
+    for (let key in user) {
+        if (key === 'id') {
+            continue;
+        }
+        formElements[key].value = user[key];
     }
-    formElements[key].value = user[key];
-  }
 }
 
 function collectData() {
-  const form = document.forms[0].elements;
-  const name = form.name.value;
-  const login = form.login.value;
-  const age = form.age.value;
-  const email = form.email.value;
+    const form = document.forms[0].elements;
+    const name = form.name.value;
+    const login = form.login.value;
+    const age = form.age.value;
+    const email = form.email.value;
 
-  const user = {
-    name,
-    login,
-    age,
-    email,
-  };
+    const user = {
+        name,
+        login,
+        age,
+        email,
+    };
 
-  return user;
+    return user;
 }
 
 function validateUser(user) {
-  let isValid = true;
+    let isValid = true;
 
-  for(let value in user) {
-    if (user[value] === '') {
-      isValid = false;
-      break;
+    for (let value in user) {
+        if (user[value] === '') {
+            isValid = false;
+            break;
+        }
     }
-  }
 
-  return isValid;
+    return isValid;
 }
 
 function generateUserId() {
-  return Date.now().toString();
+    return Date.now().toString();
 }
 
 function saveUser(user, isNew = true) {
-  if (isNew) {
-    users.push(user);
-  }
-  localStorage.setItem('users', JSON.stringify(users));
+    if (isNew) {
+        users.push(user);
+    }
+    localStorage.setItem('users', JSON.stringify(users));
 }
