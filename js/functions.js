@@ -2,7 +2,6 @@ function showUsers(usersList) {
     const parent = document.querySelector('#grid');
     parent.addEventListener('click', gridClickHandler);
 
-    // dataset data-* (data-attributes)
 
     usersList.forEach(user => {
         const userRow = createUserRow(user);
@@ -45,10 +44,6 @@ function createUserRowContent(userRow, user) {
         className: 'btn btn-danger'
     }, '', divButtons);
 }
-
-
-// attributes: { value: 'Delete', type: 'button', className: 'delete_btn' }
-// eventHandlers: { click: () => {}, mouseover: () => {}... }
 function createElement(tagName, attributes, content, parent, eventHandlers) {
     const element = document.createElement(tagName);
 
@@ -70,7 +65,6 @@ function createElement(tagName, attributes, content, parent, eventHandlers) {
 function gridClickHandler(event) {
     if (event.target.nodeName === 'INPUT') {
         const dataAction = event.target.getAttribute('data-action');
-        // const userId = event.target.parentNode.parentNode.getAttribute('data-id');
         const userId = event.target.closest('.user_row').getAttribute('data-id');
 
         const user = getUserById(userId);

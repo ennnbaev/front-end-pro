@@ -32,12 +32,6 @@ document.querySelector('.save_btn').addEventListener('click', event => {
         clearFormData();
     }
 
-    // for(let item of form) {
-    //   if (item.type !== 'button') {
-    //     console.log(item.name, item.value);
-    //   }
-    // }
-
     document.querySelector('#form').classList.add('hidden');
 });
 

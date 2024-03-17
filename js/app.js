@@ -1,4 +1,3 @@
-// TBD: update when localStorage integrated
 const users = JSON.parse(localStorage.getItem('users')) || defaultUsers;
 
 document.addEventListener('DOMContentLoaded', () => {
